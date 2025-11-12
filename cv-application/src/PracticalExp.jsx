@@ -26,7 +26,7 @@ export default function PracticalExp(){
                 <label htmlFor="toCompanyDate">To</label> 
                 <input type="date" name="toCompanyDate" id="toCompanyDate" />                
             </div>            
-            <button type="button">Edit</button><button type="button">Save</button>
+            <button type="button">Add</button>
         </form>
         </>
     )

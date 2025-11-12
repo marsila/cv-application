@@ -1,14 +1,22 @@
+//import { useState } from "react"
 
 
 
 export default function GeneralInfo() {
+
     return (
         <>
         <h1>General Information</h1>
         <form  class="form-container">
             <div className="form-group">
                 <label htmlFor="fname">First Name</label>
-                <input type="text" name="fname" id="fname" />
+                <input type="text" 
+                    name="fname" 
+                    id="fname"
+                    // value={fname}
+                    //onChange={} 
+                />
+                {/* {fname} */}
             </div>
             <div className="form-group">
                 <label htmlFor="lname">Last Name</label>

@@ -1,6 +1,7 @@
 
 
 export default function EdeucationalInfo(){
+    
     return (
         <>
         <h1>Educational Information</h1>
@@ -17,8 +18,13 @@ export default function EdeucationalInfo(){
                 <label htmlFor="dateOfStuday">Date Of Studay</label>
                 <input type="date" name="dateOfStuday" id="dateOfStuday" />
             </div>                       
-            <button type="button">Edit</button><button type="button">Save</button>
+            <button type="button">Add</button>
         </form>
+        <div className="educat-info">
+            <h2>Here the info of educatio</h2>
+            <p></p>
+            <button type="button">Edit</button>
+        </div>
         </>
     )
 }
