@@ -5,28 +5,53 @@ import PracticalExp from './PracticalExp'
 
 
 function App() {
-  const [person, setPerson] = useState({name:'', birthDate:'', email:'',phone:'', id:''});
-  const [educationInfo,setEductionInfo] = useState([{id:'', schoolName:'', titleOfStuday:'', dateOfStuday:'' }]);
-  const [practicalExp, setPracticalExp] = useState([{id:'', companyName:'', positionTitle:'', mainRes:'', fromDate:'', toDate:''}])
+  
+  const [savedPerson, setSavedPerson] = useState({name:'Marsila A', birthDate:'1984-12-16', email:'marsila@gmail.com',phone:'123 456 123', id:'R1'})
+  const [person, setPerson] = useState(savedPerson);
+  const [educationInfo,setEductionInfo] = useState([]);
+  const [educationForm, setEducationForm] = useState({});
+  const [practicalExp, setPracticalExp] = useState([{pid:'R1', companyName:'', positionTitle:'', mainRes:'', fromDate:'', toDate:''}])
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleGeneralInfoChange = (event) => {
-    const [input, value] = event.target.value;
+    if(!isEditing) return;
+    const { name, value } = event.target;
     setPerson(prevPerson => ({
       ...prevPerson,
-      [input]: value
+      [name]: value
     }));
   }
 
-  const handleEducationalInfoChange = (event) =>{
-    const [input, value] = event.target.value;
-    setEductionInfo(prevEduInfo => ({
-      ...prevEduInfo,
-      [input]: value
+  const handleGeneralInfoEditing = () => {
+    setIsEditing(true);
+    setPerson(savedPerson);
+
+  }
+  const handleGeneralInfoSaving = () => {
+    setIsEditing(false);
+    setSavedPerson(person);
+  }
+
+  const handleGeneralInfoCanceling = () => {
+    setPerson(savedPerson);
+    setIsEditing(false);
+  }
+
+  const handleEducationalFormChange = (event) =>{
+    const { name, value} = event.target;    
+    setEducationForm(prevEduForm => ({
+      ...prevEduForm,
+      [name]: value
     }))
   }
 
+  const handleEducationalInfoAdding = (event) => {
+    event.preventDefault();
+    setEductionInfo(prevEducationInfo =>  [...prevEducationInfo, educationForm]);
+  }
+
   const handlePracticalExpChange = (event) =>{
-    const [input, value] = event.target.value;
+    const {input, value} = event.target;
     setPracticalExp(prevPracticalExp => ({
       ...prevPracticalExp,
       [input]: value
@@ -37,11 +62,18 @@ function App() {
     <>
       <GeneralInfo 
         person={person} 
-        handleGeneralInfoChange= {handleGeneralInfoChange}
+        savedPerson ={savedPerson}
+        isEditing ={isEditing}
+        handleGeneralInfoChange = {handleGeneralInfoChange}
+        handleGeneralInfoEditing = {handleGeneralInfoEditing}
+        handleGeneralInfoSaving = {handleGeneralInfoSaving}
+        handleGeneralInfoCanceling = {handleGeneralInfoCanceling}
+
       />
       <EdeucationalInfo 
         educationInfo ={educationInfo}  
-        handleEducationalInfoChange ={handleEducationalInfoChange}
+        handleEducationalInfoAdding ={handleEducationalInfoAdding}
+        handleEducationalFormChange ={handleEducationalFormChange}
       />
       <PracticalExp 
         practicalExp={practicalExp}

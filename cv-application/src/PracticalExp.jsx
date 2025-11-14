@@ -4,7 +4,7 @@ export default function PracticalExp(){
     return (
         <>
         <h1>Practical Experience</h1>
-        <form  class="form-container">
+        <form  className="form-container">
             <div className="form-group">
                 <label htmlFor="companyName">Company Name</label>
                 <input type="text" name="companyName" id="companyName" />
@@ -26,7 +26,7 @@ export default function PracticalExp(){
                 <label htmlFor="toCompanyDate">To</label> 
                 <input type="date" name="toCompanyDate" id="toCompanyDate" />                
             </div>            
-            <button type="button">Add</button>
+            <button type="button" className="big-button">Add</button>
         </form>
         </>
     )
