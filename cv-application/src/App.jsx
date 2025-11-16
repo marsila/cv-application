@@ -9,12 +9,18 @@ function App() {
   const [savedPerson, setSavedPerson] = useState({name:'Marsila A', birthDate:'1984-12-16', email:'marsila@gmail.com',phone:'123 456 123', id:'R1'})
   const [person, setPerson] = useState(savedPerson);
   const [educationInfo,setEductionInfo] = useState([]);
-  const [educationForm, setEducationForm] = useState({});
+  const [educationForm, setEducationForm] = useState({
+    id:'R1',
+    schoolName:'', 
+    titleOfStuday:'', 
+    dateOfStuday:'' 
+  });
   const [practicalExp, setPracticalExp] = useState([{pid:'R1', companyName:'', positionTitle:'', mainRes:'', fromDate:'', toDate:''}])
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditingInfo, setIsEditingInfo] = useState(false);
+  const [isEditingEdu, setIsEditingEdu] = useState(null);
 
   const handleGeneralInfoChange = (event) => {
-    if(!isEditing) return;
+    if(!isEditingInfo) return;
     const { name, value } = event.target;
     setPerson(prevPerson => ({
       ...prevPerson,
@@ -23,18 +29,18 @@ function App() {
   }
 
   const handleGeneralInfoEditing = () => {
-    setIsEditing(true);
+    setIsEditingInfo(true);
     setPerson(savedPerson);
 
   }
   const handleGeneralInfoSaving = () => {
-    setIsEditing(false);
+    setIsEditingInfo(false);
     setSavedPerson(person);
   }
 
   const handleGeneralInfoCanceling = () => {
     setPerson(savedPerson);
-    setIsEditing(false);
+    setIsEditingInfo(false);
   }
 
   const handleEducationalFormChange = (event) =>{
@@ -48,7 +54,39 @@ function App() {
   const handleEducationalInfoAdding = (event) => {
     event.preventDefault();
     setEductionInfo(prevEducationInfo =>  [...prevEducationInfo, educationForm]);
+    setEducationForm({
+      id:'R1',
+      schoolName:'', 
+      titleOfStuday:'', 
+      dateOfStuday:'' 
+    });
   }
+
+  const handleEducationalInfoEditting = (index) => {
+    setIsEditingEdu(index);
+    setEducationForm(educationInfo[index]);    
+  }
+
+  const educationalInfoSaving = (event) =>{
+    event.preventDefault();
+    const updatedForm = educationInfo.map((item , index) => {
+      if(index === isEditingEdu){
+        return educationForm;
+      }
+      return item;
+    })
+    
+     setEductionInfo(updatedForm);
+     setIsEditingEdu(null);
+     setEducationForm({
+      id:'R1',
+      schoolName:'', 
+      titleOfStuday:'', 
+      dateOfStuday:'' 
+    });
+
+  }
+
 
   const handlePracticalExpChange = (event) =>{
     const {input, value} = event.target;
@@ -63,7 +101,7 @@ function App() {
       <GeneralInfo 
         person={person} 
         savedPerson ={savedPerson}
-        isEditing ={isEditing}
+        isEditing ={isEditingInfo}
         handleGeneralInfoChange = {handleGeneralInfoChange}
         handleGeneralInfoEditing = {handleGeneralInfoEditing}
         handleGeneralInfoSaving = {handleGeneralInfoSaving}
@@ -71,9 +109,13 @@ function App() {
 
       />
       <EdeucationalInfo 
-        educationInfo ={educationInfo}  
+        educationInfo ={educationInfo} 
+        educationForm = {educationForm} 
+        isEditingEdu = {isEditingEdu}
         handleEducationalInfoAdding ={handleEducationalInfoAdding}
         handleEducationalFormChange ={handleEducationalFormChange}
+        handleEducationalInfoEditting ={handleEducationalInfoEditting}
+        educationalInfoSaving ={educationalInfoSaving}
       />
       <PracticalExp 
         practicalExp={practicalExp}
