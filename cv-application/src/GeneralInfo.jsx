@@ -58,7 +58,6 @@ export default function GeneralInfo(props) {
             </div> 
             { isEditing ? 
                 <>
-                    <button type="button" onClick={handleGeneralInfoChange}>Edit</button> 
                     <button type="button" onClick={handleGeneralInfoSaving}>Save</button>
                     <button type="button" onClick={handleGeneralInfoCanceling}>Cancel</button> 
                 </> : 

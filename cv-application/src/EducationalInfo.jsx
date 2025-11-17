@@ -22,22 +22,22 @@ export default function EdeucationalInfo(props){
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="titleOfStuday">Title Of Studay</label>
+                    <label htmlFor="titleOfStudy">Title Of Study</label>
                     <input 
                         type="text" 
-                        name="titleOfStuday" 
-                        id="titleOfStuday" 
-                        value= {educationForm.titleOfStuday}
+                        name="titleOfStudy" 
+                        id="titleOfStudy" 
+                        value= {educationForm.titleOfStudy}
                         onChange={handleEducationalFormChange}
                     />
                 </div>            
                 <div className="form-group">
-                    <label htmlFor="dateOfStuday">Date Of Studay</label>
+                    <label htmlFor="dateOfStuday">Date Of Study</label>
                     <input 
                         type="date" 
-                        name="dateOfStuday" 
-                        id="dateOfStuday"
-                        value ={educationForm.dateOfStuday} 
+                        name="dateOfStudy" 
+                        id="dateOfStudy"
+                        value ={educationForm.dateOfStudy} 
                         onChange={handleEducationalFormChange}
                     />
                 </div> 
@@ -53,8 +53,8 @@ export default function EdeucationalInfo(props){
                         {educationInfo.map((info, index) => (
                             <li key={index}>
                             <div>School Name: {info.schoolName}</div>
-                            <div>Title Of Studay: {info.titleOfStuday}</div>
-                            <div>Date Of Studay: {info.dateOfStuday}</div>
+                            <div>Title Of Study: {info.titleOfStudy}</div>
+                            <div>Date Of Study: {info.dateOfStudy}</div>
                             <button
                                 type="button"
                                 onClick={() => handleEducationalInfoEditting(index)}

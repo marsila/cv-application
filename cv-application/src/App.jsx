@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import EdeucationalInfo from './EdeucationalInfo'
+import EducationalInfo from './EducationalInfo'
 import GeneralInfo from './GeneralInfo'
 import PracticalExp from './PracticalExp'
 
@@ -12,8 +12,8 @@ function App() {
   const [educationForm, setEducationForm] = useState({
     id:'R1',
     schoolName:'', 
-    titleOfStuday:'', 
-    dateOfStuday:'' 
+    titleOfStudy:'', 
+    dateOfStudy:'' 
   });
   const [practicalExp, setPracticalExp] = useState([]);
   const [practicalExpForm, setPracticalExpForm] = useState({
@@ -113,7 +113,7 @@ function App() {
     }));    
   }
 
-  const practicalExpAdd = (event) => {
+  const handlepracticalExpAdd = (event) => {
     console.log(practicalExp);
     
     event.preventDefault();    
@@ -133,7 +133,7 @@ function App() {
     setPracticalExpForm(practicalExp[index]);    
   }
 
-  const practicalExpEdit = (event) =>{
+  const handlepracticalExpSave = (event) =>{
     event.preventDefault();
     const updateForm = practicalExp.map((item, index) => {
       if(isEditingExp === index){
@@ -175,7 +175,7 @@ function App() {
         handleGeneralInfoCanceling = {handleGeneralInfoCanceling}
 
       />
-      <EdeucationalInfo 
+      <EducationalInfo
         educationInfo ={educationInfo} 
         educationForm = {educationForm} 
         isEditingEdu = {isEditingEdu}
@@ -190,9 +190,9 @@ function App() {
         practicalExpForm ={practicalExpForm}
         isEditingExp ={isEditingExp}
         handlePracticalExpFormChange ={handlePracticalExpFormChange}
-        practicalExpAdd ={practicalExpAdd} 
+        handlepracticalExpAdd ={handlepracticalExpAdd} 
         handlePracticalExpEditting ={handlePracticalExpEditting}
-        practicalExpEdit ={practicalExpEdit}
+        handlepracticalExpSave ={handlepracticalExpSave}
         practicalExpDelete ={practicalExpDelete}
       />
     </>

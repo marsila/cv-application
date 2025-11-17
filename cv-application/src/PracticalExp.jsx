@@ -3,7 +3,7 @@
 export default function PracticalExp(props){
     const {practicalExp,practicalExpForm, handlePracticalExpEditting, 
            handlePracticalExpFormChange, isEditingExp,
-           practicalExpAdd, practicalExpEdit, practicalExpDelete
+           handlepracticalExpAdd, handlepracticalExpSave, practicalExpDelete
           } 
         = props;
         
@@ -63,8 +63,8 @@ export default function PracticalExp(props){
                 />                
             </div>
             {(isEditingExp !== null) ? 
-                <button type="button" className="big-button" onClick={practicalExpEdit}>Edit</button> :
-                <button type="button" className="big-button" onClick={practicalExpAdd}>Add</button>   
+                <button type="button" className="big-button" onClick={handlepracticalExpSave}>Save</button> :
+                <button type="button" className="big-button" onClick={handlepracticalExpAdd}>Add</button>   
             }
         </form>
 
