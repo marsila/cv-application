@@ -15,9 +15,18 @@ function App() {
     titleOfStuday:'', 
     dateOfStuday:'' 
   });
-  const [practicalExp, setPracticalExp] = useState([{pid:'R1', companyName:'', positionTitle:'', mainRes:'', fromDate:'', toDate:''}])
+  const [practicalExp, setPracticalExp] = useState([]);
+  const [practicalExpForm, setPracticalExpForm] = useState({
+    pid:'R1',
+    companyName:'',
+    positionTitle:'',
+    mainRes:'',
+    fromDate:'',
+    toDate:''
+  })
   const [isEditingInfo, setIsEditingInfo] = useState(false);
   const [isEditingEdu, setIsEditingEdu] = useState(null);
+  const [isEditingExp, setIsEditingExp] = useState(null);
 
   const handleGeneralInfoChange = (event) => {
     if(!isEditingInfo) return;
@@ -87,13 +96,71 @@ function App() {
 
   }
 
+  const educationalInfoDelete = (index) => {
+    const updateEduInfo = () => {
+      const newArr = [...educationInfo];
+      newArr.splice(index,1);
+      return newArr;
+    }
+    setEductionInfo(updateEduInfo);
+  }
 
-  const handlePracticalExpChange = (event) =>{
-    const {input, value} = event.target;
-    setPracticalExp(prevPracticalExp => ({
-      ...prevPracticalExp,
-      [input]: value
-    }))
+  const handlePracticalExpFormChange = (event) =>{
+    const {name, value} = event.target;
+    setPracticalExpForm(prevPracticalExpForm => ({
+      ...prevPracticalExpForm,
+      [name]: value
+    }));    
+  }
+
+  const practicalExpAdd = (event) => {
+    console.log(practicalExp);
+    
+    event.preventDefault();    
+    setPracticalExp( prevPracticalExp => [...prevPracticalExp, practicalExpForm ]);
+    setPracticalExpForm({
+      pid:'R1',
+      companyName:'',
+      positionTitle:'',
+      mainRes:'',
+      fromDate:'',
+      toDate:''
+    })
+
+  }
+  const handlePracticalExpEditting = (index) => {
+    setIsEditingExp(index);
+    setPracticalExpForm(practicalExp[index]);    
+  }
+
+  const practicalExpEdit = (event) =>{
+    event.preventDefault();
+    const updateForm = practicalExp.map((item, index) => {
+      if(isEditingExp === index){
+        return practicalExpForm;
+      }
+      return item;
+    });
+
+    setPracticalExp(updateForm);
+    setIsEditingExp(null);
+    setPracticalExpForm({
+      pid:'R1',
+      companyName:'',
+      positionTitle:'',
+      mainRes:'',
+      fromDate:'',
+      toDate:''
+    })
+  }
+
+  const practicalExpDelete = (index)=>{
+    const updatePracticalExp = () => {
+      const newArr = [...practicalExp];
+      newArr.splice(index,1);
+      return newArr;
+    }    
+    setPracticalExp(updatePracticalExp);    
   }
   
   return (
@@ -116,10 +183,17 @@ function App() {
         handleEducationalFormChange ={handleEducationalFormChange}
         handleEducationalInfoEditting ={handleEducationalInfoEditting}
         educationalInfoSaving ={educationalInfoSaving}
+        educationalInfoDelete ={educationalInfoDelete}
       />
       <PracticalExp 
         practicalExp={practicalExp}
-        handlePracticalExpChange ={handlePracticalExpChange} 
+        practicalExpForm ={practicalExpForm}
+        isEditingExp ={isEditingExp}
+        handlePracticalExpFormChange ={handlePracticalExpFormChange}
+        practicalExpAdd ={practicalExpAdd} 
+        handlePracticalExpEditting ={handlePracticalExpEditting}
+        practicalExpEdit ={practicalExpEdit}
+        practicalExpDelete ={practicalExpDelete}
       />
     </>
   )

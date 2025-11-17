@@ -4,7 +4,7 @@
 
 export default function GeneralInfo(props) {
 
-    const {person,savedPerson, isEditing, 
+    const {person, isEditing, 
         handleGeneralInfoSaving, handleGeneralInfoEditing,
         handleGeneralInfoChange, handleGeneralInfoCanceling } = props;
     

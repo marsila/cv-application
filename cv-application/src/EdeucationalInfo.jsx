@@ -3,7 +3,7 @@
 export default function EdeucationalInfo(props){
     const {educationInfo, educationForm, handleEducationalFormChange,
              handleEducationalInfoAdding, handleEducationalInfoEditting,
-             isEditingEdu, educationalInfoSaving
+             isEditingEdu, educationalInfoSaving, educationalInfoDelete
           } = props
    
     
@@ -48,7 +48,7 @@ export default function EdeucationalInfo(props){
                 
             </form>
             <div className="educat-info">
-                <h2>Here are the info of education</h2>
+                <h2>Education Information</h2>
                     <ul>
                         {educationInfo.map((info, index) => (
                             <li key={index}>
@@ -57,10 +57,15 @@ export default function EdeucationalInfo(props){
                             <div>Date Of Studay: {info.dateOfStuday}</div>
                             <button
                                 type="button"
-                                className="big-button"
                                 onClick={() => handleEducationalInfoEditting(index)}
                             >
                                 Edit
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => educationalInfoDelete(index)}
+                            >
+                                Delete
                             </button>
                             </li>
                         ))}
