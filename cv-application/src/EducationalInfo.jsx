@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { CVContext } from './CVContext';
 
 export default function EdeucationalInfo(){
+    
     const {educationInfo, educationForm, handleEducationalFormChange,
              handleEducationalInfoAdding, handleEducationalInfoEditting,
              isEditingEdu, educationalInfoSaving, educationalInfoDelete
@@ -11,7 +12,7 @@ export default function EdeucationalInfo(){
     return (
         <>
             <h1>Educational Information</h1>
-            <form  className="form-container">
+            <form  className="form-container" onSubmit={handleEducationalInfoAdding}>
                 <div className="form-group">
                     <label htmlFor="schoolName">School Name</label>
                     <input 
@@ -44,7 +45,7 @@ export default function EdeucationalInfo(){
                 </div> 
                 { isEditingEdu !== null ?
                  <button type="button" className="big-button" onClick={educationalInfoSaving}>Save</button> :
-                 <button type="button" className="big-button" onClick={handleEducationalInfoAdding}>Add</button>   
+                 <button type="submit" className="big-button">Add</button>   
                 }                      
                 
             </form>

@@ -11,7 +11,7 @@ export default function PracticalExp(){
     return (
         <>
         <h1>Practical Experience</h1>
-        <form  className="form-container">
+        <form  className="form-container" onSubmit={handlepracticalExpAdd}>
             <div className="form-group">
                 <label htmlFor="companyName">Company Name</label>
                 <input 
@@ -65,7 +65,7 @@ export default function PracticalExp(){
             </div>
             {(isEditingExp !== null) ? 
                 <button type="button" className="big-button" onClick={handlepracticalExpSave}>Save</button> :
-                <button type="button" className="big-button" onClick={handlepracticalExpAdd}>Add</button>   
+                <button type="submit" className="big-button" >Add</button>   
             }
         </form>
 
