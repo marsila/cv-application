@@ -2,22 +2,23 @@ import { useState } from 'react'
 import EducationalInfo from './EducationalInfo'
 import GeneralInfo from './GeneralInfo'
 import PracticalExp from './PracticalExp'
+import { CVContext } from './CVContext'
 
 
 function App() {
   
-  const [savedPerson, setSavedPerson] = useState({name:'Marsila A', birthDate:'1984-12-16', email:'marsila@gmail.com',phone:'123 456 123', id:'R1'})
+  const [savedPerson, setSavedPerson] = useState({name:'Marsila A', birthDate:'1984-12-16', email:'marsila@gmail.com',phone:'123 456 123', personId:'R1'})
   const [person, setPerson] = useState(savedPerson);
   const [educationInfo,setEductionInfo] = useState([]);
   const [educationForm, setEducationForm] = useState({
-    id:'R1',
+    PersonId:'R1',
     schoolName:'', 
     titleOfStudy:'', 
     dateOfStudy:'' 
   });
   const [practicalExp, setPracticalExp] = useState([]);
   const [practicalExpForm, setPracticalExpForm] = useState({
-    pid:'R1',
+    personId:'R1',
     companyName:'',
     positionTitle:'',
     mainRes:'',
@@ -64,7 +65,7 @@ function App() {
     event.preventDefault();
     setEductionInfo(prevEducationInfo =>  [...prevEducationInfo, educationForm]);
     setEducationForm({
-      id:'R1',
+      personId:'R1',
       schoolName:'', 
       titleOfStuday:'', 
       dateOfStuday:'' 
@@ -88,7 +89,7 @@ function App() {
      setEductionInfo(updatedForm);
      setIsEditingEdu(null);
      setEducationForm({
-      id:'R1',
+      PersonId:'R1',
       schoolName:'', 
       titleOfStuday:'', 
       dateOfStuday:'' 
@@ -119,7 +120,7 @@ function App() {
     event.preventDefault();    
     setPracticalExp( prevPracticalExp => [...prevPracticalExp, practicalExpForm ]);
     setPracticalExpForm({
-      pid:'R1',
+      personId:'R1',
       companyName:'',
       positionTitle:'',
       mainRes:'',
@@ -145,7 +146,7 @@ function App() {
     setPracticalExp(updateForm);
     setIsEditingExp(null);
     setPracticalExpForm({
-      pid:'R1',
+      personId:'R1',
       companyName:'',
       positionTitle:'',
       mainRes:'',
@@ -162,40 +163,47 @@ function App() {
     }    
     setPracticalExp(updatePracticalExp);    
   }
+
+  const contextValue = {
+    //General Info props
+    person,
+    savedPerson,
+    isEditingInfo,
+    handleGeneralInfoChange,
+    handleGeneralInfoEditing,
+    handleGeneralInfoSaving,
+    handleGeneralInfoCanceling,
+
+    //Educational Info props
+    educationInfo, 
+    educationForm,
+    isEditingEdu, 
+    handleEducationalFormChange,
+    handleEducationalInfoAdding, 
+    handleEducationalInfoEditting,
+    educationalInfoSaving, 
+    educationalInfoDelete,
+
+    //Practical Experience props
+    practicalExp,
+    practicalExpForm,
+    isEditingExp, 
+    handlePracticalExpEditting, 
+    handlePracticalExpFormChange, 
+    handlepracticalExpAdd, 
+    handlepracticalExpSave, 
+    practicalExpDelete
+  }
   
   return (
-    <>
-      <GeneralInfo 
-        person={person} 
-        savedPerson ={savedPerson}
-        isEditing ={isEditingInfo}
-        handleGeneralInfoChange = {handleGeneralInfoChange}
-        handleGeneralInfoEditing = {handleGeneralInfoEditing}
-        handleGeneralInfoSaving = {handleGeneralInfoSaving}
-        handleGeneralInfoCanceling = {handleGeneralInfoCanceling}
-
-      />
-      <EducationalInfo
-        educationInfo ={educationInfo} 
-        educationForm = {educationForm} 
-        isEditingEdu = {isEditingEdu}
-        handleEducationalInfoAdding ={handleEducationalInfoAdding}
-        handleEducationalFormChange ={handleEducationalFormChange}
-        handleEducationalInfoEditting ={handleEducationalInfoEditting}
-        educationalInfoSaving ={educationalInfoSaving}
-        educationalInfoDelete ={educationalInfoDelete}
-      />
-      <PracticalExp 
-        practicalExp={practicalExp}
-        practicalExpForm ={practicalExpForm}
-        isEditingExp ={isEditingExp}
-        handlePracticalExpFormChange ={handlePracticalExpFormChange}
-        handlepracticalExpAdd ={handlepracticalExpAdd} 
-        handlePracticalExpEditting ={handlePracticalExpEditting}
-        handlepracticalExpSave ={handlepracticalExpSave}
-        practicalExpDelete ={practicalExpDelete}
-      />
-    </>
+    <CVContext.Provider value={contextValue}>
+      <>
+        <GeneralInfo/>
+        <EducationalInfo/>
+        <PracticalExp />
+      </>
+    </CVContext.Provider>
+    
   )
 }
 

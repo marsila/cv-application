@@ -1,10 +1,11 @@
+import { useContext } from "react";
+import { CVContext } from './CVContext';
 
-
-export default function EdeucationalInfo(props){
+export default function EdeucationalInfo(){
     const {educationInfo, educationForm, handleEducationalFormChange,
              handleEducationalInfoAdding, handleEducationalInfoEditting,
              isEditingEdu, educationalInfoSaving, educationalInfoDelete
-          } = props
+          } = useContext(CVContext);
    
     
     return (

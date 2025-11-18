@@ -1,12 +1,15 @@
-//import { useState } from "react"
+import { useContext } from "react";
+import { CVContext } from './CVContext';
 
 
 
-export default function GeneralInfo(props) {
+export default function GeneralInfo() {
 
-    const {person, isEditing, 
-        handleGeneralInfoSaving, handleGeneralInfoEditing,
-        handleGeneralInfoChange, handleGeneralInfoCanceling } = props;
+    const {person, isEditingInfo, 
+        handleGeneralInfoSaving, 
+        handleGeneralInfoEditing,
+        handleGeneralInfoChange, 
+        handleGeneralInfoCanceling } = useContext(CVContext);
     
     
 
@@ -21,7 +24,7 @@ export default function GeneralInfo(props) {
                     id="name"
                     value={person.name}
                     onChange={handleGeneralInfoChange}
-                    disabled = {!isEditing}
+                    disabled = {!isEditingInfo}
                 />
             </div>
             <div className="form-group">
@@ -32,7 +35,7 @@ export default function GeneralInfo(props) {
                     placeholder="YYYY-MM-DD"
                     value= {person.birthDate}
                     onChange={handleGeneralInfoChange}
-                    disabled = {!isEditing}
+                    disabled = {!isEditingInfo}
                 />
             </div>            
             <div className="form-group">
@@ -43,7 +46,7 @@ export default function GeneralInfo(props) {
                     placeholder="jane.doe@example.com"
                     value ={person.email}
                     onChange={handleGeneralInfoChange}
-                    disabled = {!isEditing}
+                    disabled = {!isEditingInfo}
                 />
             </div>            
             <div className="form-group">
@@ -53,10 +56,10 @@ export default function GeneralInfo(props) {
                     id="phone" 
                     value={person.phone}
                     onChange={handleGeneralInfoChange}
-                    disabled = {!isEditing}
+                    disabled = {!isEditingInfo}
                 />
             </div> 
-            { isEditing ? 
+            { isEditingInfo ? 
                 <>
                     <button type="button" onClick={handleGeneralInfoSaving}>Save</button>
                     <button type="button" onClick={handleGeneralInfoCanceling}>Cancel</button> 

@@ -1,11 +1,12 @@
+import { useContext } from "react";
+import { CVContext } from './CVContext';
 
-
-export default function PracticalExp(props){
+export default function PracticalExp(){
     const {practicalExp,practicalExpForm, handlePracticalExpEditting, 
            handlePracticalExpFormChange, isEditingExp,
            handlepracticalExpAdd, handlepracticalExpSave, practicalExpDelete
           } 
-        = props;
+        = useContext(CVContext);
         
     return (
         <>
