@@ -73,7 +73,7 @@ export default function PracticalExp(){
             <h2>The Practical Experience</h2>
             <ul>
                 {practicalExp.map((exp, index) =>(
-                  <li key={index}>
+                  <li key={exp.id}>
                     <div>Company Name: {exp.companyName}</div>
                     <div>Position Title: {exp.positionTitle}</div>
                     <div>Main Resposibality: {exp.mainRes}</div>

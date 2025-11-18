@@ -5,26 +5,30 @@ import PracticalExp from './PracticalExp'
 import { CVContext } from './CVContext'
 
 
+
 function App() {
-  
-  const [savedPerson, setSavedPerson] = useState({name:'Marsila A', birthDate:'1984-12-16', email:'marsila@gmail.com',phone:'123 456 123', personId:'R1'})
-  const [person, setPerson] = useState(savedPerson);
-  const [educationInfo,setEductionInfo] = useState([]);
-  const [educationForm, setEducationForm] = useState({
+  const INITIAL_EDUCATION_FORM = {
     PersonId:'R1',
+    id:null,
     schoolName:'', 
     titleOfStudy:'', 
     dateOfStudy:'' 
-  });
-  const [practicalExp, setPracticalExp] = useState([]);
-  const [practicalExpForm, setPracticalExpForm] = useState({
+  };
+  const INITIAL_PRACTICAL_FORM = {
     personId:'R1',
+    id:null,
     companyName:'',
     positionTitle:'',
     mainRes:'',
     fromDate:'',
     toDate:''
-  })
+  };
+  const [savedPerson, setSavedPerson] = useState({name:'Marsila A', birthDate:'1984-12-16', email:'marsila@gmail.com',phone:'123 456 123', personId:'R1'})
+  const [person, setPerson] = useState(savedPerson);
+  const [educationInfo,setEductionInfo] = useState([]);
+  const [educationForm, setEducationForm] = useState(INITIAL_EDUCATION_FORM);
+  const [practicalExp, setPracticalExp] = useState([]);
+  const [practicalExpForm, setPracticalExpForm] = useState(INITIAL_PRACTICAL_FORM);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
   const [isEditingEdu, setIsEditingEdu] = useState(null);
   const [isEditingExp, setIsEditingExp] = useState(null);
@@ -63,13 +67,9 @@ function App() {
 
   const handleEducationalInfoAdding = (event) => {
     event.preventDefault();
-    setEductionInfo(prevEducationInfo =>  [...prevEducationInfo, educationForm]);
-    setEducationForm({
-      personId:'R1',
-      schoolName:'', 
-      titleOfStuday:'', 
-      dateOfStuday:'' 
-    });
+    const newEduForm = {...educationForm, id:crypto.randomUUID()} 
+    setEductionInfo(prevEducationInfo =>  [...prevEducationInfo, newEduForm]);
+    setEducationForm(INITIAL_EDUCATION_FORM);
   }
 
   const handleEducationalInfoEditting = (index) => {
@@ -88,12 +88,7 @@ function App() {
     
      setEductionInfo(updatedForm);
      setIsEditingEdu(null);
-     setEducationForm({
-      PersonId:'R1',
-      schoolName:'', 
-      titleOfStuday:'', 
-      dateOfStuday:'' 
-    });
+     setEducationForm(INITIAL_EDUCATION_FORM);
 
   }
 
@@ -114,19 +109,11 @@ function App() {
     }));    
   }
 
-  const handlepracticalExpAdd = (event) => {
-    console.log(practicalExp);
-    
-    event.preventDefault();    
-    setPracticalExp( prevPracticalExp => [...prevPracticalExp, practicalExpForm ]);
-    setPracticalExpForm({
-      personId:'R1',
-      companyName:'',
-      positionTitle:'',
-      mainRes:'',
-      fromDate:'',
-      toDate:''
-    })
+  const handlepracticalExpAdd = (event) => {    
+    event.preventDefault(); 
+    const newPracForm = {...practicalExpForm, id:crypto.randomUUID()};   
+    setPracticalExp( prevPracticalExp => [...prevPracticalExp, newPracForm]);
+    setPracticalExpForm(INITIAL_PRACTICAL_FORM)
 
   }
   const handlePracticalExpEditting = (index) => {
@@ -145,14 +132,7 @@ function App() {
 
     setPracticalExp(updateForm);
     setIsEditingExp(null);
-    setPracticalExpForm({
-      personId:'R1',
-      companyName:'',
-      positionTitle:'',
-      mainRes:'',
-      fromDate:'',
-      toDate:''
-    })
+    setPracticalExpForm(INITIAL_PRACTICAL_FORM);
   }
 
   const practicalExpDelete = (index)=>{
@@ -178,6 +158,7 @@ function App() {
     educationInfo, 
     educationForm,
     isEditingEdu, 
+    INITIAL_EDUCATION_FORM,
     handleEducationalFormChange,
     handleEducationalInfoAdding, 
     handleEducationalInfoEditting,
@@ -188,6 +169,7 @@ function App() {
     practicalExp,
     practicalExpForm,
     isEditingExp, 
+    INITIAL_PRACTICAL_FORM,
     handlePracticalExpEditting, 
     handlePracticalExpFormChange, 
     handlepracticalExpAdd, 

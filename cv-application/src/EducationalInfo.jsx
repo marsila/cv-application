@@ -52,7 +52,7 @@ export default function EdeucationalInfo(){
                 <h2>Education Information</h2>
                     <ul>
                         {educationInfo.map((info, index) => (
-                            <li key={index}>
+                            <li key={info.id}>
                             <div>School Name: {info.schoolName}</div>
                             <div>Title Of Study: {info.titleOfStudy}</div>
                             <div>Date Of Study: {info.dateOfStudy}</div>
